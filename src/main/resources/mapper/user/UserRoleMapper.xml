@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="top.guoshouzhen.blog.blogmsauth.mapper.user.UserRoleMapper">
+  <resultMap id="BaseResultMap" type="top.guoshouzhen.blog.blogmsauth.model.po.user.UserRole">
+    <!--@mbg.generated-->
+    <!--@Table t_user_role-->
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="user_id" jdbcType="BIGINT" property="userId" />
+    <result column="role_id" jdbcType="INTEGER" property="roleId" />
+    <result column="status" jdbcType="INTEGER" property="status" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    <!--@mbg.generated-->
+    id, user_id, role_id, `status`
+  </sql>
+  <select id="selectUserRoleByUserId" resultMap="BaseResultMap">
+  select <include refid="Base_Column_List" />
+  from t_user_role
+  where user_id = #{lUserId,jdbcType=BIGINT} and status = 0;
+  </select>
+</mapper>

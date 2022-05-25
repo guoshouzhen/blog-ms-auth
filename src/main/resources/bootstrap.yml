@@ -1,0 +1,41 @@
+spring:
+  profiles:
+    active: dev
+  application:
+    name: blog-auth-service
+  cloud:
+    nacos:
+      config:
+        file-extension: yaml
+---
+spring:
+  profiles: dev
+  cloud:
+    nacos:
+      config:
+        # nacos服务器地址
+        server-addr: localhost:8848
+        # 不同命名空间相互隔离
+        namespace: f20658e9-6fd5-4b1b-9ccf-855475f3f4a3
+    sentinel:
+      transport:
+        # 数据通信端口
+        port: 8091
+        # 控制台端口
+        dashboard: localhost:8090
+---
+spring:
+  profiles: prod
+  cloud:
+    nacos:
+      config:
+        # nacos服务器地址
+        server-addr: localhost:8848
+        # 不同命名空间相互隔离
+        namespace: f3635460-eac2-44e1-b37c-c09597192651
+    sentinel:
+      transport:
+        # 数据通信端口
+        port: 8091
+        # 控制台端口
+        dashboard: localhost:8090
