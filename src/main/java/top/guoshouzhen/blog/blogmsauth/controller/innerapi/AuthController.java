@@ -24,7 +24,7 @@ import java.util.List;
  * @date 2022/3/10 18:09
  */
 @RestController
-@RequestMapping("authcenter/api/innerapi")
+@RequestMapping("api/innerapi")
 public class AuthController {
     @Resource
     private TokenService tokenService;

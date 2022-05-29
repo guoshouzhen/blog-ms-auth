@@ -29,7 +29,7 @@ public class CommonInterceptor implements HandlerInterceptor {
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
         //1.所有请求添加唯一的日志追踪ID
         TraceIdUtil.setTraceId();
-        //2.TODO　加密签名、时间戳验证
+        //2.TODO　加密签名验证
         return true;
     }
 

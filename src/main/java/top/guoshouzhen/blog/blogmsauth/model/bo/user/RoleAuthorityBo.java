@@ -16,6 +16,7 @@ import lombok.NoArgsConstructor;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
+@Deprecated
 public class RoleAuthorityBo {
     /**
      * 主键id
