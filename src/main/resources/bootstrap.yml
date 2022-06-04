@@ -6,43 +6,6 @@ spring:
     active: @env@
   application:
     name: blog-ms-authcenter
-  cloud:
-    nacos:
-      # 注册中心
-      discovery:
-        server-addr: http://localhost:8848
-      # 配置中心
-      config:
-        file-extension: yaml
-        group: BLOG_AUTH_CENTER
-        # 不同环境使用Data ID做区分，命名空间和group为默认，配置中心中Data ID格式： ${prefix}-${spring.profiles.active}.${file-extension}
-        prefix: ${spring.application.name}
-        encode: UTF-8
-
-  # redis相关配置，开发环境和生成环境都通过公网访问（方便开发环境也能使用这个集群）
-  redis:
-    database: 0
-    cluster:
-      nodes:
-        - 121.4.222.96:6371
-        - 121.4.222.96:6372
-        - 121.4.222.96:6373
-        - 121.4.222.96:6374
-        - 121.4.222.96:6375
-        - 121.4.222.96:6376
-      max-redirects: 3
-    password: abc123
-    lettuce:
-      pool:
-        # 连接池最大连接数（使用负值表示没有限制）
-        max-active: 10 #连接池最大连接数
-        # 连接池中的最大空闲连接
-        max-idle: 8 #连接池中最大空闲连接数
-        # 当连接池耗尽时， 抛出异常之前，连接分配被阻塞的时间，也就是连接池满后最长等待时间，负值表示无限期等待
-        max-wait: 2000 #连接池最大等待阻塞时间
-        #连接池中的最小空闲连接
-        min-idle: 0 #连接池中最小空闲数
-    timeout: 6000ms #访问超时时间
 
   # jackson日期序列化格式配置
   jackson:
@@ -71,3 +34,38 @@ management:
   metrics:
     tags:
       application: ${spring.application.name}
+
+---
+#开发环境配置
+spring:
+  profiles: dev
+  cloud:
+    nacos:
+      #注册中心
+      discovery:
+        server-addr: http://localhost:8848
+      #配置中心
+      config:
+        server-addr: http://localhost:8848
+        file-extension: yaml
+        group: BLOG_AUTH_CENTER
+        # 不同环境使用Data ID做区分，命名空间和group为默认，配置中心中Data ID格式： ${prefix}-${spring.profiles.active}.${file-extension}
+        prefix: ${spring.application.name}
+        encode: UTF-8
+---
+#生产环境配置
+spring:
+  profiles: prod
+  cloud:
+    nacos:
+      discovery:
+        server-addr: http://172.18.0.3:8848
+      #配置中心
+      config:
+        #坑：注册中心也要配置地址，否则会不断连接localhost:8848
+        server-addr: http://172.18.0.3:8848
+        file-extension: yaml
+        group: BLOG_AUTH_CENTER
+        # 不同环境使用Data ID做区分，命名空间和group为默认，配置中心中Data ID格式： ${prefix}-${spring.profiles.active}.${file-extension}
+        prefix: ${spring.application.name}
+        encode: UTF-8

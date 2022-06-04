@@ -70,7 +70,8 @@ public class TokenService {
             token = JwtUtil.generateTokenExpireInSeconds(userDetailsBo, rsaKeyProperties.getRsaPrivateKey(), TokenConstant.TOKEN_VALID_TIME);
             token = TokenConstant.JWT_TOKEN_PREFIX + token;
 
-            //放入redis白名单，字典保存，这里的redis过期时间设置的比签入token的过期时间稍微长一点，验证过期时以token中的时间为准。防止验证token时间通过，但在redis中失效找不到的问题
+            //放入redis白名单，字典保存
+            //TODO 待优化：过期时间设置不合理
             RedisUtil.hmSet(REDIS_BLOG_USER_LOGIN_WHITELIST, REDIS_BLOG_USER_TOKEN_KEY_PREFIX + user.getId(), token, TokenConstant.TOKEN_VALID_TIME + 10);
         }
 
