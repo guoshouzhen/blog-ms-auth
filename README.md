@@ -2,7 +2,8 @@
 
 #### 介绍
 基于spring boot搭建的微服务，作为博客项目的认证鉴权中心，主要为其他服务提供token颁发、认证及权限验证接口。  
-关键词：spring boot，spring cloud alibaba，mybatis，mysql，redis，jwt
+
+关键词：java，spring boot，spring cloud alibaba，mybatis，mysql，redis，jwt
 
 #### 程序结构说明
 ```
